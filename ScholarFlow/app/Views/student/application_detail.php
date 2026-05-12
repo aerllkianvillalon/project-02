@@ -32,12 +32,6 @@ $isEditing = isset($csrf);
                             <i class="bi bi-pencil-fill"></i> Edit Application
                         </a>
                     <?php else: ?>
-                        <?php $viewUrl = ($auth['role'] === 'reviewer')
-                            ? APP_URL . '/reviewer/applications/' . (int)$app['id'] . '/view'
-                            : APP_URL . '/admin/applications/' . (int)$app['id']; ?>
-                        <a href="<?= $viewUrl ?>" class="btn-cancel-edit">
-                            <i class="bi bi-x-lg"></i> Cancel
-                        </a>
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
@@ -215,7 +209,15 @@ $isEditing = isset($csrf);
                                     <textarea name="review_notes" class="form-control" rows="4" placeholder="Add notes about your decision..."><?= htmlspecialchars($app['review_notes'] ?? '') ?></textarea>
                                 </div>
                                 </form>
-                        <div class="form-actions" style="margin-top:1.25rem;">
+                        <div class="form-actions">
+                            <?php
+                            $viewUrl = ($auth['role'] === 'reviewer')
+                                ? APP_URL . '/reviewer/applications/' . (int)$app['id'] . '/view'
+                                : APP_URL . '/admin/applications/' . (int)$app['id'];
+                            ?>
+                            <a href="<?= $viewUrl ?>" class="btn-cancel">
+                                <i class="bi bi-x-lg"></i> Cancel
+                            </a>
                             <button type="submit" form="decisionForm" class="btn-save" onclick="return confirm('Do you want to save changes to this decision?');">
                                 <i class="bi bi-check-lg"></i> Save Changes
                             </button>

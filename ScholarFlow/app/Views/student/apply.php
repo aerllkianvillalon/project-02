@@ -1,4 +1,4 @@
-<?php $pageTitle = 'Apply — ' . $scholarship['name']; $bodyClass = 'app-body'; ?>
+<?php $pageTitle = (isset($editMode) && $editMode ? 'Edit — ' : 'Apply — ') . $scholarship['name']; $bodyClass = 'app-body'; ?>
 <?php require ROOT . '/app/Views/layouts/header.php'; ?>
 
 <div class="app-layout">
@@ -74,7 +74,7 @@
                             </div>
                             <textarea name="essay" class="form-control textarea-lg"
                                       placeholder="Write your personal statement here (minimum 50 characters)..."
-                                      rows="8" required><?= htmlspecialchars($essay ?? ($editMode ? $app['essay'] : '')) ?></textarea>
+                                      rows="8" required><?= htmlspecialchars($essay ?? (isset($editMode) && $editMode ? $app['essay'] : '')) ?></textarea>
                             <div class="char-counter"><span id="charCount">0</span> characters</div>
                         </div>
 
