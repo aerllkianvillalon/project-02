@@ -57,7 +57,7 @@ class ApplicationController extends Controller
         }
 
         // Validate required documents
-        $requiredDocs = ['transcript', 'id_document'];
+        $requiredDocs = ['transcript', 'coe_cor', 'good_moral', 'id_document'];
         foreach ($requiredDocs as $docType) {
             if (empty($_FILES[$docType]['name'])) {
                 $errors[] = ucwords(str_replace('_', ' ', $docType)) . ' is required.';
@@ -82,7 +82,7 @@ class ApplicationController extends Controller
         ]);
 
         // Upload documents
-        $docTypes = ['transcript', 'id_document', 'recommendation', 'other'];
+        $docTypes = ['transcript', 'coe_cor', 'good_moral', 'id_document', 'recommendation', 'other'];
         foreach ($docTypes as $docType) {
             $file = $this->file($docType);
             if (!$file) continue;
@@ -193,7 +193,7 @@ class ApplicationController extends Controller
             'updated_at'  => date('Y-m-d H:i:s'),
         ]);
 
-        $docTypes = ['transcript', 'id_document', 'recommendation', 'other'];
+        $docTypes = ['transcript', 'coe_cor', 'good_moral', 'id_document', 'recommendation', 'other'];
         foreach ($docTypes as $docType) {
             $file = $this->file($docType);
             if (!$file) continue;

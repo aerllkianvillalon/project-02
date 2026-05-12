@@ -16,7 +16,18 @@
         <main class="app-content">
             <?php require ROOT . '/app/Views/layouts/flash.php'; ?>
 
-            <div class="stats-grid">
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <div class="welcome-text">
+                    <h3>Welcome, <?= htmlspecialchars(explode(' ', $auth['name'])[0]) ?>! 👋</h3>
+                    <p>Review pending applications and help students achieve their goals.</p>
+                </div>
+                <a href="<?= APP_URL ?>/reviewer/applications" class="btn-primary-sm">
+                    <i class="bi bi-clipboard2-check"></i> View Applications
+                </a>
+            </div>
+
+            <div class="stats-grid stats-grid-3">
                 <div class="stat-card stat-pending">
                     <div class="stat-icon"><i class="bi bi-hourglass-split"></i></div>
                     <div class="stat-info">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2026 at 02:19 PM
+-- Generation Time: May 12, 2026 at 09:00 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,10 +45,8 @@ CREATE TABLE `applications` (
 --
 
 INSERT INTO `applications` (`id`, `user_id`, `scholarship_id`, `essay`, `status`, `reviewed_by`, `review_notes`, `reviewed_at`, `created_at`, `updated_at`) VALUES
-(9, 7, 7, 'aersadazsdfcv fsdzgrhnvfgjyugbvfykjbhuinhulnhjilmo', 'rejected', 1, 'No.', '2026-05-12 09:57:42', '2026-05-11 17:44:56', NULL),
 (10, 3, 7, 'sfdgsxdfsdfsdefsddefdsefsdefdesrfxsefxsderfxserfse', 'pending', NULL, NULL, NULL, '2026-05-12 03:33:24', NULL),
-(11, 4, 2, 'awdaswdazsdzaswdasdasdzasdzasdzasdzasdzasdaswdedwe', 'pending', NULL, NULL, NULL, '2026-05-12 03:39:37', NULL),
-(12, 4, 4, 'sadfasdaszwdazsdaswdazsdzasdfazsfazfrwwraqraqerfqawr', 'pending', NULL, NULL, NULL, '2026-05-12 03:40:04', NULL);
+(19, 4, 2, 'sdfsdfsdsdffsdsfdsddsfdsfsdfdsfsdfsdfsdfsdfsdfsdfsfd', 'approved', 2, '', '2026-05-12 20:52:17', '2026-05-12 19:42:31', '2026-05-13 02:52:17');
 
 -- --------------------------------------------------------
 
@@ -59,7 +57,7 @@ INSERT INTO `applications` (`id`, `user_id`, `scholarship_id`, `essay`, `status`
 CREATE TABLE `documents` (
   `id` int(10) UNSIGNED NOT NULL,
   `application_id` int(10) UNSIGNED NOT NULL,
-  `doc_type` enum('transcript','id_document','recommendation','other') NOT NULL,
+  `doc_type` enum('transcript','coe_cor','good_moral','id_document','recommendation','other') NOT NULL,
   `file_path` varchar(255) NOT NULL,
   `original_name` varchar(255) NOT NULL,
   `uploaded_at` datetime NOT NULL DEFAULT current_timestamp()
@@ -70,14 +68,12 @@ CREATE TABLE `documents` (
 --
 
 INSERT INTO `documents` (`id`, `application_id`, `doc_type`, `file_path`, `original_name`, `uploaded_at`) VALUES
-(17, 9, 'transcript', 'documents/doc_6a01f978533d16.22113522.png', 'Axolotl_Bucket.png', '2026-05-11 17:44:56'),
-(18, 9, 'id_document', 'documents/doc_6a01f978609f95.20193079.png', 'Axolotl_Bucket.png', '2026-05-11 17:44:56'),
 (19, 10, 'transcript', 'documents/doc_6a028364953812.78018058.png', 'Axolotl_Bucket.png', '2026-05-12 03:33:24'),
 (20, 10, 'id_document', 'documents/doc_6a028364e86cb4.22194261.png', 'Axolotl_Bucket.png', '2026-05-12 03:33:24'),
-(21, 11, 'transcript', 'documents/doc_6a0284da075d67.88906997.png', 'imresizer-Axolotl_Bucket.png', '2026-05-12 03:39:38'),
-(22, 11, 'id_document', 'documents/doc_6a0284da1f1e41.34860043.png', 'imresizer-Axolotl_Bucket.png', '2026-05-12 03:39:38'),
-(23, 12, 'transcript', 'documents/doc_6a0284f4dc3569.73561627.png', 'Axolotl_Bucket.png', '2026-05-12 03:40:04'),
-(24, 12, 'id_document', 'documents/doc_6a0284f51616c9.47243427.png', 'Axolotl_Bucket.png', '2026-05-12 03:40:05');
+(39, 19, 'transcript', 'documents/doc_6a036687ab78a2.22622957.jpg', 'c102b153-e1a7-4835-ac99-5c2d04808d42 (1).jpg', '2026-05-12 19:42:31'),
+(40, 19, 'coe_cor', 'documents/doc_6a036687c94a73.20085036.jpg', 'c102b153-e1a7-4835-ac99-5c2d04808d42 (1).jpg', '2026-05-12 19:42:31'),
+(41, 19, 'good_moral', 'documents/doc_6a036687daf2e3.23287909.jpg', 'c102b153-e1a7-4835-ac99-5c2d04808d42 (1).jpg', '2026-05-12 19:42:31'),
+(42, 19, 'id_document', 'documents/doc_6a036687eb2ed5.34393796.jpg', 'c102b153-e1a7-4835-ac99-5c2d04808d42 (1).jpg', '2026-05-12 19:42:31');
 
 -- --------------------------------------------------------
 
@@ -110,7 +106,7 @@ INSERT INTO `scholarships` (`id`, `name`, `description`, `requirements`, `amount
 (4, 'Ayala Foundation Scholarship', 'The Ayala Foundation Scholarship Program aims to develop the next generation of leaders by supporting exceptional students with academic excellence and demonstrated leadership potential.', 'Outstanding academic record (minimum GWA 1.5). Demonstrated leadership in school or community organizations. Financial need. Must be taking business, social sciences, or humanities courses.', 15000.00, '2026-08-07', NULL, 1, 'active', '2026-05-09 23:16:07', NULL),
 (5, 'Metrobank Foundation Excellence Award', 'Recognizes and supports exceptional students who demonstrate academic excellence, strong values, and commitment to service. Open to all courses in accredited Philippine universities.', 'Must be a 3rd year college student. Must have a minimum GWA of 1.25 (95%). Must show proof of financial need. No failed subjects. Active in school organizations.', 30000.00, '2026-05-24', 25, 1, 'active', '2026-05-09 23:16:07', NULL),
 (6, 'DepEd Regional Scholarship Grant', 'A regional government scholarship for public school graduates who demonstrate exceptional academic performance and financial need, prioritizing education and technology courses.', 'Must be a graduate of a public high school. Enrolled in a state university or college. Minimum GWA of 1.75. Must be a permanent resident of the region.', 10000.00, '2026-07-23', 200, 0, 'active', '2026-05-09 23:16:07', NULL),
-(7, 'Future Innovators STEM Scholarship 2026', 'This scholarship aims to support academically talented but financially disadvantaged Filipino students pursuing degrees in Science, Technology, Engineering, and Mathematics (STEM). The goal is to cultivate the next generation of researchers and innovators to drive national progress.', 'Must be a natural-born Filipino citizen.\r\nIncoming 1st-year college student for Academic Year 2026-2027.\r\nMust be enrolled in a STEM-related course (e.g., Engineering, Computer Science, Biology, Chemistry).\r\nMust have a general weighted average (GWA) of at least 85% or equivalent in Grades 11 and 12.\r\nTotal annual family gross income must not exceed PHP 400,000.\r\nMust be of good moral character and in good health.', 50000.00, '2026-05-30', 30, 0, 'active', '2026-05-10 18:20:27', '2026-05-10 12:20:27');
+(7, 'Future Innovators STEM Scholarship 2026', 'This scholarship aims to support academically talented but financially disadvantaged Filipino students pursuing degrees in Science, Technology, Engineering, and Mathematics (STEM). The goal is to cultivate the next generation of researchers and innovators to drive national progress.', 'Incoming 1st-year college student for Academic Year 2026-2027.\r\nMust be enrolled in a STEM-related course (e.g., Engineering, Computer Science, Biology, Chemistry).\r\nMust have a general weighted average (GWA) of at least 85% or equivalent in Grades 11 and 12.', 50000.00, '2026-05-16', 30, 0, 'active', '2026-05-10 18:20:27', '2026-05-12 19:15:57');
 
 -- --------------------------------------------------------
 
@@ -141,10 +137,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `phone`, `address`, `school`, `course`, `gpa`, `year_level`, `avatar`, `created_at`, `updated_at`) VALUES
 (1, 'System Admin', 'admin@scholarflow.com', '$2y$10$Am06hGblcASejPXFSNvQQedfnFqC1DREBeA8sFW8.NjWA.2eGLxJG', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-09 23:16:06', '2026-05-11 15:33:17'),
-(2, 'Jane Reviewer', 'reviewer@scholarflow.com', '$2y$10$cX/4jeWRrZEyJdBYA6kbmO8nEnyG8/.Vz9EmbfMtT3ICCjRr39MMe', 'reviewer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-09 23:16:06', '2026-05-11 15:33:17'),
+(2, 'Jane Reviewer', 'reviewer@scholarflow.com', '$2y$10$lgyUB5cyiBD5KbyMmGbbcOksRoRKs1RukePi1ykg6rnEjW26.AkMy', 'reviewer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-09 23:16:06', '2026-05-12 22:47:27'),
 (3, 'Juan dela Cruz', 'student@scholarflow.com', '$2y$10$5En/q75zZHef5KM3jyIhhO.e5tbbbSk1tSVhaszmdNl8cJZj0Shba', 'student', '+63 912 345 6789', NULL, 'Cebu Institute of Technology — University', 'BS Computer Science', '1.50', '3rd Year', NULL, '2026-05-09 23:16:06', '2026-05-12 09:20:27'),
-(4, 'Aerll Kian Villalon', 'aerllkianvillalon@gmail.com', '$2y$10$V3YwBkqw5b3FF/JZo.WNb.ftuFqlgvMb9AgkVhyC0GX4y37Y6YDBa', 'student', '09109466040', 'Taboc, Danao City, Cebu', 'Cebu Technological University - Danao Campus', 'BSIT', '1', '2nd Year', 'avatars/doc_6a026adaee0131.42212625.jpg', '2026-05-10 11:23:15', '2026-05-12 01:48:42'),
-(7, 'Aerll Kian Villalon', 'villalonaerllkian@gmail.com', '$2y$10$qhkmUZGGPjfF0SfU4rCrvOiVZ5nIHAEEAGja/1k2ELqHgbOuwf4cC', 'student', '', '', '', '', NULL, NULL, 'avatars/doc_6a01f92a832426.36300080.png', '2026-05-11 17:42:46', '2026-05-11 17:43:38');
+(4, 'Aerll Kian Villalon', 'aerllkianvillalon@gmail.com', '$2y$10$V3YwBkqw5b3FF/JZo.WNb.ftuFqlgvMb9AgkVhyC0GX4y37Y6YDBa', 'student', '09109466040', 'Taboc, Danao City, Cebu', 'Cebu Technological University - Danao Campus', 'BSIT', '1', '2nd Year', 'avatars/doc_6a026adaee0131.42212625.jpg', '2026-05-10 11:23:15', '2026-05-12 01:48:42');
 
 --
 -- Indexes for dumped tables
@@ -193,25 +188,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `documents`
 --
 ALTER TABLE `documents`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `scholarships`
 --
 ALTER TABLE `scholarships`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

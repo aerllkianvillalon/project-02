@@ -97,7 +97,7 @@ $bodyClass = 'landing-body';
             list-style: none;
         }
         .nav-links a {
-            padding: 0.5rem 0.875rem;
+            padding: 0.4rem 0.875rem;
             font-size: 0.9rem; font-weight: 500;
             color: var(--gray-600);
             border-radius: var(--radius-md);

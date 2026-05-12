@@ -72,6 +72,8 @@ $bodyClass  = 'app-body';
                         </h5>
                         <ul class="doc-req-list">
                             <li><i class="bi bi-check-circle-fill"></i> Transcript of Records</li>
+                            <li><i class="bi bi-check-circle-fill"></i> COE / COR</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Good Moral Certificate</li>
                             <li><i class="bi bi-check-circle-fill"></i> Valid Government ID</li>
                             <li><i class="bi bi-dash-circle"></i> Recommendation Letter (optional)</li>
                             <li><i class="bi bi-dash-circle"></i> Other Supporting Documents (optional)</li>

@@ -32,8 +32,19 @@ $bodyClass  = 'app-body';
         <main class="app-content">
             <?php require ROOT . '/app/Views/layouts/flash.php'; ?>
 
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <div class="welcome-text">
+                    <h3>Welcome, <?= htmlspecialchars(explode(' ', $auth['name'])[0]) ?>! 👋</h3>
+                    <p>Manage users, scholarships, and monitor all applications.</p>
+                </div>
+                <a href="<?= APP_URL ?>/admin/scholarships/create" class="btn-primary-sm">
+                    <i class="bi bi-plus-lg"></i> Add Scholarship
+                </a>
+            </div>
+
             <!-- System Overview -->
-            <div class="section-label-row"><h4>System Overview</h4></div>
+            <div class="section-label-row"></div>
             <div class="stats-grid stats-grid-5">
                 <div class="stat-card stat-total">
                     <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
@@ -169,16 +180,16 @@ $bodyClass  = 'app-body';
                                 </div>
                             <?php endforeach; ?>
                         </div>
-                        <a href="<?= APP_URL ?>/admin/scholarships/create" class="btn-add-sm">
-                            <i class="bi bi-plus-lg"></i> Add New Scholarship
-                        </a>
+                    
                     <?php endif; ?>
                 </div>
             </div>
 
 <!-- Quick Actions -->
             <div class="content-card">
-                <h4 style="margin-bottom:1.25rem">Quick Actions</h4>
+                <div class="card-header-row">
+                    <h4>Quick Actions</h4>
+                </div>
                 <div class="quick-actions-grid">
                     <a href="<?= APP_URL ?>/admin/users/create" class="quick-action-card">
 

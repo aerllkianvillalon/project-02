@@ -9,6 +9,10 @@ class Scholarship extends Model
 
     public function allActive(): array
     {
+        // Auto-close scholarships past their deadline
+        $this->execute(
+            "UPDATE scholarships SET status = 'closed' WHERE status = 'active' AND deadline < CURDATE()"
+        );
         return $this->query(
             "SELECT * FROM scholarships WHERE status = 'active' ORDER BY deadline ASC"
         );
@@ -54,8 +58,6 @@ class Scholarship extends Model
             [$userId]
         );
 
-
-
         // IDs already applied to
         $appliedIds = $this->query(
             "SELECT scholarship_id FROM applications WHERE user_id = ?",
@@ -71,13 +73,7 @@ class Scholarship extends Model
         // - If student has an EXCLUSIVE pending/approved => lock ALL scholarships.
         // - Else if student has a MULTIPLE pending/approved => lock ONLY EXCLUSIVE scholarships.
         $s['locked'] = ($hasExclusiveBlocking) || ($hasMultipleBlocking && !$s['allows_multiple']);
-
-
-
-
-
         }
-
         return $scholarships;
     }
 
@@ -85,6 +81,13 @@ class Scholarship extends Model
     {
         $scholarship = $this->find($scholarshipId);
         if (!$scholarship) return ['available' => false, 'reason' => 'Scholarship not found.'];
+        if (strtotime($scholarship['deadline']) < strtotime('today')) {
+            $this->execute(
+                "UPDATE scholarships SET status = 'closed' WHERE id = ?",
+                [$scholarshipId]
+            );
+            return ['available' => false, 'reason' => 'This scholarship deadline has passed.'];
+        }
         if ($scholarship['status'] !== 'active') return ['available' => false, 'reason' => 'This scholarship is no longer active.'];
 
         // Already applied?
@@ -129,10 +132,13 @@ class Scholarship extends Model
                 'reason'    => 'You already have an allow-multiple scholarship application pending/approved. You cannot apply to exclusive scholarships yet.'
             ];
         }
-
         return ['available' => true, 'scholarship' => $scholarship];
+    }
 
-
+    public function closeExpired(): void
+    {
+        $this->execute(
+            "UPDATE scholarships SET status = 'closed' WHERE status = 'active' AND deadline < CURDATE()"
+        );
     }
 }
-

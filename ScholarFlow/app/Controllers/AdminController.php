@@ -65,8 +65,9 @@ class AdminController extends Controller
 
         $users = $this->user->searchWithRole($role, $q);
         $flash = $this->getFlash();
+        $csrf  = $this->generateCsrfToken();
 
-        $this->view('admin.users', compact('auth', 'users', 'role', 'q', 'flash'));
+        $this->view('admin.users', compact('auth', 'users', 'role', 'q', 'flash', 'csrf'));
     }
 
     public function createUserForm(): void
@@ -164,6 +165,8 @@ class AdminController extends Controller
     {
         $this->requireRole('admin');
         $auth = $this->auth();
+        // Auto-close any past-deadline scholarships before displaying
+        $this->scholarship->closeExpired();
         $scholarships = $this->scholarship->allWithStats();
         $flash = $this->getFlash();
         $this->view('admin.scholarships', compact('auth', 'scholarships', 'flash'));

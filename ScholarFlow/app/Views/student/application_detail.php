@@ -168,7 +168,7 @@ $isEditing = isset($csrf);
                                             <i class="bi bi-<?= $ext === 'pdf' ? 'file-earmark-pdf' : 'file-earmark-image' ?>"></i>
                                         </div>
                                         <div class="doc-info">
-                                            <?php $docLabels = ['transcript' => 'Transcript of Records', 'id_document' => 'Identity Document', 'recommendation' => 'Recommendation Letter', 'other' => 'Other Document']; ?>
+                                            <?php $docLabels = ['transcript' => 'Transcript of Records', 'coe_cor' => 'COE / COR', 'good_moral' => 'Good Moral Certificate', 'id_document' => 'Valid ID', 'recommendation' => 'Recommendation Letter', 'other' => 'Other Document']; ?>
                                             <strong><?= $docLabels[$doc['doc_type']] ?? ucwords(str_replace('_', ' ', $doc['doc_type'])) ?></strong>
                                             <small><?= htmlspecialchars($doc['original_name']) ?></small>
                                         </div>

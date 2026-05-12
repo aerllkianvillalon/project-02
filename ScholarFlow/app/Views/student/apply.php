@@ -94,10 +94,12 @@
                                 foreach ($documents as $doc) $existingDocs[$doc['doc_type']] = $doc;
                             }
                             $docFields = [
-                                'transcript'     => ['label' => 'Transcript of Records', 'icon' => 'file-earmark-text', 'required' => true],
-                                'id_document'    => ['label' => 'Valid ID',               'icon' => 'person-badge',      'required' => true],
-                                'recommendation' => ['label' => 'Recommendation Letter',  'icon' => 'envelope-paper',    'required' => false],
-                                'other'          => ['label' => 'Other Document',          'icon' => 'paperclip',         'required' => false],
+                                'transcript'     => ['label' => 'Transcript of Records',   'icon' => 'file-earmark-text', 'required' => true],
+                                'coe_cor'        => ['label' => 'COE / COR',               'icon' => 'file-earmark-ruled', 'required' => true],
+                                'good_moral'     => ['label' => 'Good Moral Certificate',  'icon' => 'patch-check',       'required' => true],
+                                'id_document'    => ['label' => 'Valid ID',                 'icon' => 'person-badge',      'required' => true],
+                                'recommendation' => ['label' => 'Recommendation Letter',   'icon' => 'envelope-paper',    'required' => false],
+                                'other'          => ['label' => 'Other Document',           'icon' => 'paperclip',         'required' => false],
                             ];
                             ?>
                             <div class="upload-grid">
@@ -201,6 +203,21 @@ function clearFile(btn) {
 
 // Confirm on submit
 document.getElementById('applyForm').addEventListener('submit', function(e) {
+    const requiredInputs = document.querySelectorAll('.upload-field.required .file-input');
+    let missingDocs = false;
+
+    requiredInputs.forEach(input => {
+        // In edit mode, an existing doc counts as already uploaded
+        const hasExisting = !!input.closest('.upload-field').querySelector('.existing-doc-notice');
+        if (!input.files.length && !hasExisting) missingDocs = true;
+    });
+
+    const essay = document.querySelector('textarea[name="essay"]');
+    if (missingDocs || essay.value.trim().length < 50) {
+        // Let PHP handle the error message — just don't disable the button
+        return;
+    }
+
     const btn = document.getElementById('submitBtn');
     btn.disabled = true;
     btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Submitting...';
