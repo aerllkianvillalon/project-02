@@ -31,7 +31,7 @@ $bodyClass  = 'app-body';
             <!-- Welcome Banner -->
             <div class="welcome-banner">
                 <div class="welcome-text">
-                    <h3>Welcome back, <?= htmlspecialchars(explode(' ', $auth['name'])[0]) ?>! 👋</h3>
+                    <h3>Welcome, <?= htmlspecialchars(explode(' ', $auth['name'])[0]) ?>! 👋</h3>
                     <p>Track your applications and discover new scholarships.</p>
                 </div>
                 <a href="<?= APP_URL ?>/scholarships" class="btn-primary-sm">
